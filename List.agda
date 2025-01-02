@@ -20,9 +20,6 @@ concat (x ∷ l1) l2 = x ∷ concat l1 l2
 concat-length : {A : Set} → List A → List A → ℕ
 concat-length l1 l2 = length l1 + length l2
 
--- cong : {A B : Set} (f : A → B) {l1 l2 : List A} → l1 ≡ l2 → f l1 ≡ f l2
--- cong f refl = refl
-
 concat-assoc : {A : Set} → (l1 l2 l3 : List A) → concat (concat l1 l2) l3 ≡ concat l1 (concat l2 l3)
 concat-assoc [] l2 l3 = refl
 concat-assoc (x ∷ l1) l2 l3 = cong (λ l → x ∷ l) (concat-assoc l1 l2 l3)
@@ -34,11 +31,6 @@ append (y ∷ l) x = y ∷ (append l x)
 rev : {A : Set} → List A → List A
 rev [] = []
 rev (x ∷ l) = append (rev l) x
-
--- TODO
--- append-rev : {A : Set} → (l : List A) → (x : A) → append (rev l) x ≡ x ∷ (rev l)
--- append-rev [] x = refl
--- append-rev (y ∷ l) x = cong rev (append-rev (x ∷ {! l!}) {! !})
 
 length-append : {A : Set} → (l : List A) → (x : A) → length (append l x) ≡ length l + 1
 length-append [] x = refl
